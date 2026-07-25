@@ -1,0 +1,55 @@
+/* Custom Styles for Taste Hub */
+
+@media (min-width: 992px) {
+    .col-lg-2-4 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
+}
+
+.category-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.recipe-item .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.recipe-item .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
+}
+/* Hero Banner Background Styling */
+.hero-banner {
+    
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+                url('../images/hero banner.png.png') no-repeat center center;
+    background-size: cover;
+}
+
+/*pastel colors for category cards*/
+.Breakfast-card {
+    background-color:rgb(231, 231, 136);
+}
+.Lunch-card {
+    background-color:lightgreen;
+}
+.Dinner-card {
+    background-color: lightskyblue;
+}
+.Dessert-card {
+    background-color: lightcoral;
+}
+.Drink-card {
+    background-color: lightseagreen;
+}
+.Snack-card {
+    background-color: rgb(135, 141, 148);
+}
