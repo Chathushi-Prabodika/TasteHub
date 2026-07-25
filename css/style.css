@@ -30,6 +30,26 @@
 .hero-banner {
     
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
-                url('C:\Users\Abans pc\Desktop\academic\1.2 semester\web technology\project photo') no-repeat center center;
+                url('../images/hero banner.png.png') no-repeat center center;
     background-size: cover;
+}
+
+/*pastel colors for category cards*/
+.Breakfast-card {
+    background-color:rgb(231, 231, 136);
+}
+.Lunch-card {
+    background-color:lightgreen;
+}
+.Dinner-card {
+    background-color: lightskyblue;
+}
+.Dessert-card {
+    background-color: lightcoral;
+}
+.Drink-card {
+    background-color: lightseagreen;
+}
+.Snack-card {
+    background-color: rgb(135, 141, 148);
 }
