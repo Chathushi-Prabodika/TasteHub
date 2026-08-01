@@ -31,7 +31,7 @@
             }
         };
 
-        
+    
         const urlParams = new URLSearchParams(window.location.search);
         const selectedId = urlParams.get('id') || 'salad'; 
         const recipe = recipesData[selectedId];
@@ -58,3 +58,5 @@
         recipe.instructions.forEach(step => {
             insList.innerHTML += `<li>${step}</li>`;
         });
+
+
