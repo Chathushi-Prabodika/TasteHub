@@ -119,3 +119,26 @@ let currentMode = 'login'; // 'login' or 'register'
         alert("Google Authentication simulated successfully!");
         window.location.href = 'index.html';
     }
+
+ //newslatter validation  
+const newsletterForm = document.getElementById("newsletterForm");
+const newsletterEmail = document.getElementById("newsletterEmail");
+const emailError = document.getElementById("emailError");
+
+if (newsletterForms) {
+    newsletterForm.addEventListener("submit", function(event) {
+        // Prevent the page from refreshing immediately
+        event.preventDefault(); 
+        
+        const emailValue = newsletterEmail.value.trim();
+
+        // Check if it's empty OR if it doesn't include an '@'
+        if (emailValue === "" || !emailValue.includes("@")) {
+            emailError.style.display = "block"; // Show our custom RED error
+            emailError.textContent = "Please enter a valid email containing '@'.";
+        } else {
+            emailError.style.display = "none"; // Hide error
+            alert("Awesome! You have successfully joined our community.");
+        }
+    });
+}
