@@ -22,7 +22,7 @@
             waffles: {
                 title: "Berry Waffle Pancakes",
                 badge: "Breakfast / Dessert",
-                image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800",
+               image: "images/Belgian-Waffls.jpg",
                 rating: "4.7 (140 reviews)",
                 desc: "Fluffy pancakes served with fresh berries, maple syrup, and whipped cream.",
                 prep: "15 min", cook: "10 min", diff: "Easy", servings: "3",
