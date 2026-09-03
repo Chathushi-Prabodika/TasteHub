@@ -1,0 +1,244 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste Hub - Discover. Cook. Share.</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+    <!-- 1. Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light border-bottom sticky-top py-2">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold fs-4 text-dark" href="index.php">
+                <i class="bi bi-cup-hot-fill text-danger fs-3"></i> Taste Hub
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active fw-semibold text-danger" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="recipes.php">Recipes</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="contact.php">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex align-items-center gap-3">
+                    <div class="input-group d-none d-md-flex">
+                        <span class="input-group-text bg-light border-0"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control bg-light border-0" placeholder="search recipes...">
+                    </div>
+                    <i class="bi bi-bell fs-5 cursor-pointer"></i>
+                    
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <a href="auth/logout.php" class="btn btn-outline-danger px-4 py-2 fw-semibold text-nowrap shadow-sm">Logout</a>
+                    <?php else: ?>
+                        <a href="auth/login.php" class="btn btn-danger px-4 py-2 text-white fw-semibold text-nowrap shadow-sm">Login/Register</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <section class="container my-4">
+        <div class="p-4 p-md-5 rounded-4 text-white position-relative overflow-hidden shadow-sm" 
+             style="background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('images/hero banner.png.png') center/cover no-repeat; min-height: 380px;">
+            
+            <div class="row align-items-center py-4">
+                <div class="col-lg-7 z-1">
+                    <span class="badge bg-danger bg-opacity-75 text-white mb-3 px-3 py-2 rounded-pill fw-normal">
+                        <i class="bi bi-shop me-1"></i> Welcome to Taste Hub
+                    </span>
+                    <h1 class="display-4 fw-bold mb-3">Discover. Cook. <span class="text-danger">Share.</span></h1>
+                    <p class="text-light mb-4 col-md-10">Explore thousands of delicious recipes from around the world. Share your recipes and inspire others.</p>
+                    
+                    <!-- Search Bar -->
+                    <div class="input-group mb-3 bg-white rounded-pill p-1 shadow-sm" style="max-width: 500px;">
+                        <input type="text" class="form-control border-0 bg-transparent px-3 text-dark" placeholder="Search recipes, ingredients or categories..">
+                        <button class="btn btn-danger rounded-circle p-2 px-3" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Categories Section -->
+    <section class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Browse by Categories</h4>
+            <a href="recipes.php" class="text-danger text-decoration-none fw-semibold">view all ></a>
+        </div>
+
+        <div class="row g-3 text-center">
+            <div class="col-6 col-md-2">
+                <div class="p-3 rounded-4 border shadow-sm category-card Breakfast-card">
+                    <div class="fs-1 text-warning mb-2"><i class="bi bi-brightness-high-fill"></i></div>
+                    <h6 class="fw-bold mb-1">Breakfast</h6>
+                    <small class="text-muted">120 recipes</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="p-3 rounded-4 border shadow-sm category-card Lunch-card">
+                    <div class="fs-1 text-success mb-2"><i class="bi bi-cup-hot-fill"></i></div>
+                    <h6 class="fw-bold mb-1">Lunch</h6>
+                    <small class="text-muted">150 recipes</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="p-3 rounded-4 border shadow-sm category-card Dinner-card">
+                    <div class="fs-1 text-primary mb-2"><i class="bi bi-moon-stars-fill"></i></div>
+                    <h6 class="fw-bold mb-1">Dinner</h6>
+                    <small class="text-muted">80 recipes</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="p-3 rounded-4 border shadow-sm category-card Dessert-card">
+                    <div class="fs-1 text-danger mb-2"><i class="bi bi-cake2-fill"></i></div>
+                    <h6 class="fw-bold mb-1">Desserts</h6>
+                    <small class="text-muted">20 recipes</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="p-3 rounded-4 border shadow-sm category-card Drink-card">
+                    <div class="fs-1 text-info mb-2"><i class="bi bi-cup-straw"></i></div>
+                    <h6 class="fw-bold mb-1">Drinks</h6>
+                    <small class="text-muted">100 recipes</small>
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="p-3 rounded-4 border shadow-sm category-card Snack-card">
+                    <div class="fs-1 text-secondary mb-2"><i class="bi bi-egg-fried"></i></div>
+                    <h6 class="fw-bold mb-1">Snacks</h6>
+                    <small class="text-muted">220 recipes</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Popular Recipes Section -->
+    <section class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Popular Recipes</h4>
+            <a href="recipes.php" class="text-danger text-decoration-none fw-semibold">view all ></a>
+        </div>
+
+        <div class="row g-4" id="recipeGrid">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2-4 recipe-item">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                    <img src="images/garlic creamy pasta.jfif" class="card-img-top" alt="Pasta" style="height: 140px; object-fit: cover;">
+                    <div class="card-body p-3">
+                        <h6 class="card-title fw-bold mb-1 text-truncate">Creamy garlic pasta</h6>
+                        <div class="d-flex align-items-center justify-content-between text-muted small mt-2">
+                            <span><i class="bi bi-star-fill text-warning me-1"></i>4.8</span>
+                            <span><i class="bi bi-clock me-1"></i>25 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2-4 recipe-item">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500" class="card-img-top" alt="Chicken" style="height: 140px; object-fit: cover;">
+                    <div class="card-body p-3">
+                        <h6 class="card-title fw-bold mb-1 text-truncate">Chicken bhuna masala</h6>
+                        <div class="d-flex align-items-center justify-content-between text-muted small mt-2">
+                            <span><i class="bi bi-star-fill text-warning me-1"></i>4.0</span>
+                            <span><i class="bi bi-clock me-1"></i>35 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2-4 recipe-item">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=500" class="card-img-top" alt="Roasted chicken" style="height: 140px; object-fit: cover;">
+                    <div class="card-body p-3">
+                        <h6 class="card-title fw-bold mb-1 text-truncate">Juicy roasted chicken</h6>
+                        <div class="d-flex align-items-center justify-content-between text-muted small mt-2">
+                            <span><i class="bi bi-star-fill text-warning me-1"></i>3.5</span>
+                            <span><i class="bi bi-clock me-1"></i>20 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2-4 recipe-item">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500" class="card-img-top" alt="Lava cake" style="height: 140px; object-fit: cover;">
+                    <div class="card-body p-3">
+                        <h6 class="card-title fw-bold mb-1 text-truncate">Chocolate lava cake</h6>
+                        <div class="d-flex align-items-center justify-content-between text-muted small mt-2">
+                            <span><i class="bi bi-star-fill text-warning me-1"></i>4.8</span>
+                            <span><i class="bi bi-clock me-1"></i>15 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2-4 recipe-item">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500" class="card-img-top" alt="Pancakes" style="height: 140px; object-fit: cover;">
+                    <div class="card-body p-3">
+                        <h6 class="card-title fw-bold mb-1 text-truncate">Banana pancakes</h6>
+                        <div class="d-flex align-items-center justify-content-between text-muted small mt-2">
+                            <span><i class="bi bi-star-fill text-warning me-1"></i>4.0</span>
+                            <span><i class="bi bi-clock me-1"></i>20 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Newsletter Banner -->
+    <section class="container my-5">
+        <div class="p-4 rounded-4 shadow-sm" style="background-color: #F8A588;">
+            <div class="row align-items-center g-3">
+                <div class="col-md-6 d-flex align-items-center gap-3">
+                    <div class="bg-white p-3 rounded-circle text-danger fs-2 d-none d-sm-block">
+                        <i class="bi bi-journal-richtext"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-1">Share your recipes with the world!</h5>
+                        <p class="mb-0 text-dark small">join our community and share your signature recipes with others.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-0"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control border-0" placeholder="Enter your email">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top py-4 text-center text-muted small">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Taste Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS & Main JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
