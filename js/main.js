@@ -1,62 +1,67 @@
 let currentMode = 'login'; // 'login' or 'register'
 
-    // DOM Elements
-    const authForm = document.getElementById('authForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const fullNameInput = document.getElementById('fullName');
-    const togglePasswordBtn = document.getElementById('togglePassword');
-    
-    const emailError = document.getElementById('emailError');
-    const passwordError = document.getElementById('passwordError');
-    const nameError = document.getElementById('nameError');
+// DOM Elements
+const authForm = document.getElementById('authForm');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const fullNameInput = document.getElementById('fullName');
+const togglePasswordBtn = document.getElementById('togglePassword');
 
-    const formHeader = document.getElementById('formHeader');
-    const formSubheader = document.getElementById('formSubheader');
-    const loginTabBtn = document.getElementById('loginTabBtn');
-    const registerTabBtn = document.getElementById('registerTabBtn');
-    const nameGroup = document.getElementById('nameGroup');
-    const optionsRow = document.getElementById('optionsRow');
-    const submitBtn = document.getElementById('submitBtn');
-    const footerText = document.getElementById('footerText');
+const emailError = document.getElementById('emailError');
+const passwordError = document.getElementById('passwordError');
+const nameError = document.getElementById('nameError');
 
-    // 1. FEATURE: Password Visibility Toggle
+const formHeader = document.getElementById('formHeader');
+const formSubheader = document.getElementById('formSubheader');
+const loginTabBtn = document.getElementById('loginTabBtn');
+const registerTabBtn = document.getElementById('registerTabBtn');
+const nameGroup = document.getElementById('nameGroup');
+const optionsRow = document.getElementById('optionsRow');
+const submitBtn = document.getElementById('submitBtn');
+const footerText = document.getElementById('footerText');
+
+// 1. Password Visibility Toggle
+if (togglePasswordBtn) {
     togglePasswordBtn.addEventListener('click', function () {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
     });
+}
 
-    // 2. FEATURE: Tab Switcher (Login <-> Register)
-    function switchTab(mode) {
-        currentMode = mode;
-        clearValidationErrors();
+// 2. Tab Switcher (Login <-> Register)
+function switchTab(mode) {
+    currentMode = mode;
+    clearValidationErrors();
 
-        if (mode === 'register') {
-            loginTabBtn.classList.remove('active');
-            registerTabBtn.classList.add('active');
-            formHeader.textContent = 'Create Account';
-            formSubheader.textContent = 'Start your culinary adventure today!';
-            nameGroup.classList.remove('d-none');
-            optionsRow.classList.add('d-none');
-            submitBtn.querySelector('span').textContent = 'Register';
-            footerText.innerHTML = 'Already have an account? <a href="#" onclick="switchTab(\'login\'); return false;">Login here</a>';
-        } else {
-            registerTabBtn.classList.remove('active');
-            loginTabBtn.classList.add('active');
-            formHeader.textContent = 'Welcome Back!';
-            formSubheader.textContent = 'Login to continue your cooking journey';
-            nameGroup.classList.add('d-none');
-            optionsRow.classList.remove('d-none');
-            submitBtn.querySelector('span').textContent = 'Login';
-            footerText.innerHTML = 'Don\'t have an account? <a href="#" onclick="switchTab(\'register\'); return false;">Register here</a>';
-        }
+    if (mode === 'register') {
+        if (loginTabBtn) loginTabBtn.classList.remove('active');
+        if (registerTabBtn) registerTabBtn.classList.add('active');
+        if (formHeader) formHeader.textContent = 'Create Account';
+        if (formSubheader) formSubheader.textContent = 'Start your culinary adventure today!';
+        if (nameGroup) nameGroup.classList.remove('d-none');
+        if (optionsRow) optionsRow.classList.add('d-none');
+        if (submitBtn) submitBtn.querySelector('span').textContent = 'Register';
+        if (footerText) footerText.innerHTML = 'Already have an account? <a href="#" onclick="switchTab(\'login\'); return false;">Login here</a>';
+    } else {
+        if (registerTabBtn) registerTabBtn.classList.remove('active');
+        if (loginTabBtn) loginTabBtn.classList.add('active');
+        if (formHeader) formHeader.textContent = 'Welcome Back!';
+        if (formSubheader) formSubheader.textContent = 'Login to continue your cooking journey';
+        if (nameGroup) nameGroup.classList.add('d-none');
+        if (optionsRow) optionsRow.classList.remove('d-none');
+        if (submitBtn) submitBtn.querySelector('span').textContent = 'Login';
+        if (footerText) footerText.innerHTML = 'Don\'t have an account? <a href="#" onclick="switchTab(\'register\'); return false;">Register here</a>';
     }
+}
 
-    // 3. FEATURE: Form Validation (JavaScript Feature requirement)
+// 3. Form Validation & Redirect
+if (authForm) {
     authForm.addEventListener('submit', function (event) {
-        event.preventDefault();
+        // PHP Backend එකට Submit කිරීමට අවශ්‍ය නම් පහත පේළිය Comment (//) කරන්න
+        event.preventDefault(); 
+
         let isValid = true;
         clearValidationErrors();
 
@@ -74,7 +79,7 @@ let currentMode = 'login'; // 'login' or 'register'
             isValid = false;
         }
 
-        // Full Name validation (If Register mode)
+        // Full Name validation (Only if Register mode)
         if (currentMode === 'register' && fullNameInput.value.trim() === '') {
             showError(fullNameInput, nameError);
             isValid = false;
@@ -84,39 +89,39 @@ let currentMode = 'login'; // 'login' or 'register'
             const userEmail = emailInput.value.trim();
             const actionText = currentMode === 'login' ? 'Logged in successfully!' : 'Account registered successfully!';
             
-            // Simple Success Feedback Banner/Alert
-            alert(`Success: ${actionText}\nWelcome back, ${userEmail}!`);
+            // Alert message
+            alert(`Success: ${actionText}\nWelcome, ${userEmail}!`);
             
-            // Redirect to Home Page (index.html)
-            window.location.href = 'index.html';
+            // Main folder එකේ තියෙන index.php එකට යැවීම
+            window.location.href = '../index.php'; 
         }
     });
+}
 
-    function showError(inputElement, errorElement) {
-        inputElement.classList.add('is-invalid');
-        errorElement.style.display = 'block';
+function showError(inputElement, errorElement) {
+    if (inputElement) inputElement.classList.add('is-invalid');
+    if (errorElement) errorElement.style.display = 'block';
+}
+
+function clearValidationErrors() {
+    [emailInput, passwordInput, fullNameInput].forEach(input => {
+        if (input) input.classList.remove('is-invalid');
+    });
+    [emailError, passwordError, nameError].forEach(error => {
+        if (error) error.style.display = 'none';
+    });
+}
+
+// Event Handlers
+function handleForgotPassword(e) {
+    if (e) e.preventDefault();
+    const email = prompt("Please enter your registered email address to reset your password:");
+    if (email) {
+        alert(`A password reset link has been sent to ${email}`);
     }
+}
 
-    function clearValidationErrors() {
-        [emailInput, passwordInput, fullNameInput].forEach(input => {
-            input.classList.remove('is-invalid');
-        });
-        [emailError, passwordError, nameError].forEach(error => {
-            error.style.display = 'none';
-        });
-    }
-
-    // Event Handlers for interactive actions
-    function handleForgotPassword(e) {
-        e.preventDefault();
-        const email = prompt("Please enter your registered email address to reset your password:");
-        if (email) {
-            alert(`A password reset link has been sent to ${email}`);
-        }
-    }
-
-    function handleGoogleLogin() {
-        alert("Google Authentication simulated successfully!");
-        window.location.href = 'index.html';
-    }
-
+function handleGoogleLogin() {
+    alert("Google Authentication simulated successfully!");
+    window.location.href = '../index.php';
+}

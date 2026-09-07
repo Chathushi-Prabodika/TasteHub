@@ -43,8 +43,21 @@ session_start();
                     <i class="bi bi-bell fs-5 cursor-pointer"></i>
                     
                     <?php if (isset($_SESSION['user_id'])): ?>
-                        <a href="auth/logout.php" class="btn btn-outline-danger px-4 py-2 fw-semibold text-nowrap shadow-sm">Logout</a>
+                        <!-- User Logged In State -->
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2 rounded-pill px-3 py-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle fs-5 text-danger"></i>
+                                <span><?php echo isset($_SESSION['user_name']) ? htmlspecialchars($_SESSION['user_name']) : 'Profile'; ?></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                                <li><a class="dropdown-item d-flex align-items-center gap-2" href="profile.php"><i class="bi bi-person"></i> My Profile</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2" href="my-recipes.php"><i class="bi bi-journal-text"></i> My Recipes</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="auth/logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </div>
                     <?php else: ?>
+                        <!-- Guest State -->
                         <a href="auth/login.php" class="btn btn-danger px-4 py-2 text-white fw-semibold text-nowrap shadow-sm">Login/Register</a>
                     <?php endif; ?>
                 </div>

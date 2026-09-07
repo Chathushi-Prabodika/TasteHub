@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $full_name = trim($first_name . ' ' . $last_name);
 
-    // Validation Check කිරීම
+    // Validation Check 
     if (empty($full_name) || empty($email) || empty($message)) {
         $error_msg = "Please fill in all required fields.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
